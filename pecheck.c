@@ -635,11 +635,6 @@ cleanup:
 }
 
 
-/* ============================================================================
- * SECTION 6: COMMAND LINE INTERFACE
- * ============================================================================
- */
-
 
 void print_usage(const char* prog) {
     printf("PE Integrity Checker v1.0\n");
