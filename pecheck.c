@@ -108,21 +108,7 @@ typedef struct {
 } PE_SECTION_HEADER;
 
 
-/**
- * load_pe_file - Load entire PE file into memory
- *
- * Parameters:
- *   path  - File path to load
- *   size  - Output parameter for file size
- *
- * Returns:
- *   Pointer to allocated buffer (must be freed with free()), or NULL on error
- *
- * Why we load entire file:
- * - PE parsing requires random access to headers
- * - Hash calculation needs sequential read
- * - Signature verification needs full file context
- */
+
 unsigned char* load_pe_file(const char* path, DWORD* size) {
     FILE* f = fopen(path, "rb");  // Binary mode prevents newline translation
     if (!f) {
