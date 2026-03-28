@@ -635,6 +635,7 @@ cleanup:
 }
 
 
+    /* Command Line Interface */
 
 void print_usage(const char* prog) {
     printf("PE Integrity Checker v1.0\n");
