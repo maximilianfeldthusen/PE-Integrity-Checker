@@ -1,19 +1,4 @@
 
-Thought about this
-PE Integrity Checker: OpenSSL Integration + Complete Code Explanation
-Here's the production-ready version with proper OpenSSL integration for Linux/macOS, plus detailed code explanations.
-
-Part 1: Complete Code with OpenSSL Support
-/*
- * PE Integrity Checker: Signature + Hash Verification
- * Cross-Platform: Windows (BCrypt) + Linux/macOS (OpenSSL)
- *
- * Compile:
- *   Windows: gcc -o pe_check pe_check.c -lbcrypt -lcrypt32
- *   Linux:   gcc -o pe_check pe_check.c -lssl -lcrypto
- *   macOS:   gcc -o pe_check pe_check.c -lssl -lcrypto
- */
-
 
 #include <stdio.h>
 #include <stdlib.h>
