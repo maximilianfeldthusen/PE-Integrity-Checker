@@ -4,7 +4,7 @@ Here’s your text converted into clean **GitHub-flavored Markdown (GFM)** with 
 
 ---
 
-# Part 2: Detailed Code Explanation
+##  Detailed Code Explanation
 
 ## Section 1: File I/O Functions
 
@@ -56,7 +56,7 @@ Write modified PE back to disk (used after IAT reconstruction).
 
 ---
 
-## Section 2: SHA-256 Hash Implementation
+## SHA-256 Hash Implementation
 
 ### Windows: BCrypt API
 
@@ -157,7 +157,7 @@ int compute_sha256(const unsigned char* data, DWORD size, char* hex_output)
 
 ---
 
-## Section 3: PE Structure Accessors
+## PE Structure Accessors
 
 ### `get_optional_header_offset()`
 
@@ -179,6 +179,5 @@ FileHeader:      20 bytes
 Total:           24 bytes
 ```
 
----
 
-If you want, I can also convert **Part 1** or generate a **README.md with diagrams and visuals** for GitHub.
+
