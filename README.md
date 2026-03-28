@@ -1,8 +1,5 @@
 ## PE-Integrity-Checker
 
-Here’s your text converted into clean **GitHub-flavored Markdown (GFM)** with proper structure, headings, tables, and code blocks:
-
----
 
 ##  Detailed Code Explanation
 
