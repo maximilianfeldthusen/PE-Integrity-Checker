@@ -108,12 +108,6 @@ typedef struct {
 } PE_SECTION_HEADER;
 
 
-/* ============================================================================
- * SECTION 1: FILE I/O FUNCTIONS
- * ============================================================================
- */
-
-
 /**
  * load_pe_file - Load entire PE file into memory
  *
@@ -203,11 +197,6 @@ int save_pe_file(const char* path, unsigned char* buffer, DWORD size) {
     return 1;
 }
 
-
-/* ============================================================================
- * SECTION 2: SHA-256 HASH IMPLEMENTATION (Cross-Platform)
- * ============================================================================
- */
 
 
 /**
