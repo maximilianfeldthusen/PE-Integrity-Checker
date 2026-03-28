@@ -185,23 +185,6 @@ int save_pe_file(const char* path, unsigned char* buffer, DWORD size) {
 
 
 
-/**
- * compute_sha256_win - Windows implementation using BCrypt
- *
- * BCrypt is the modern Windows Crypto API (Vista+)
- * Advantages:
- *   - Hardware acceleration on supported CPUs
- *   - FIPS 140-2 compliant
- *   - No external dependencies
- *
- * Parameters:
- *   data       - Input data buffer
- *   size       - Size of input data
- *   hex_output - Output buffer (must be at least 65 bytes: 64 hex chars + null)
- *
- * Returns:
- *   0 on success, -1 on error
- */
 #if PLATFORM_WINDOWS
 int compute_sha256_win(const unsigned char* data, DWORD size, char* hex_output) {
     BCRYPT_ALG_HANDLE hAlg = NULL;
