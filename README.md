@@ -1,8 +1,5 @@
 ## PE-Integrity-Checker
 
-
-##  Detailed Code Explanation
-
 ## File I/O Functions
 
 ### `load_pe_file()`
