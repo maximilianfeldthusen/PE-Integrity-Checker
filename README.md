@@ -1,5 +1,7 @@
 ## PE-Integrity-Checker
 
+Portable Executable (PE) file integrity checking, is used in cybersecurity to verify that executable files haven't been tampered.
+
 ## File I/O Functions
 
 ### `load_pe_file()`
