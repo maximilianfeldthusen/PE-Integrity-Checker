@@ -6,7 +6,7 @@ Here’s your text converted into clean **GitHub-flavored Markdown (GFM)** with 
 
 ##  Detailed Code Explanation
 
-## Section 1: File I/O Functions
+## File I/O Functions
 
 ### `load_pe_file()`
 
