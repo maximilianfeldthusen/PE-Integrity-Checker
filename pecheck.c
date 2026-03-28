@@ -638,7 +638,7 @@ cleanup:
     /* Command Line Interface */
 
 void print_usage(const char* prog) {
-    printf("PE Integrity Checker v1.0\n");
+    printf("PE Integrity Checker v1.0.1beta\n");
     printf("Cross-Platform: Windows (BCrypt) + Linux/macOS (OpenSSL)\n\n");
     printf("Usage:\n");
     printf("  %s <command> [options] <file> [expected_hash]\n\n", prog);
