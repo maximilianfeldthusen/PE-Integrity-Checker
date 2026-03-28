@@ -345,26 +345,7 @@ int compute_sha256(const unsigned char* data, DWORD size, char* hex_output) {
 }
 
 
-/* ============================================================================
- * SECTION 3: PE STRUCTURE ACCESSORS
- * ============================================================================
- */
-
-
-/**
- * get_optional_header_offset - Calculate offset to Optional Header
- *
- * PE layout:
- *   DOS Header (64 bytes)
- *   DOS Stub (variable)
- *   NT Headers:
- *     - Signature (4 bytes)
- *     - File Header (20 bytes)
- *     - Optional Header (variable: 224 for PE32, 240 for PE32+)
- *
- * Returns:
- *   Offset to Optional Header, or 0 on error
- */
+    
 DWORD get_optional_header_offset(const unsigned char* pe_data) {
     PE_DOS_HEADER* dos = (PE_DOS_HEADER*)pe_data;
    
@@ -382,19 +363,7 @@ DWORD get_optional_header_offset(const unsigned char* pe_data) {
 }
 
 
-/**
- * get_data_directory - Get pointer to specific Data Directory entry
- *
- * DataDirectories is an array of 16 entries in Optional Header
- * Each entry is 8 bytes (4 RVA + 4 Size)
- *
- * Parameters:
- *   pe_data      - PE file buffer
- *   entry_index  - Which directory (0-15)
- *
- * Returns:
- *   Pointer to PE_DATA_DIRECTORY, or NULL on error
- */
+
 PE_DATA_DIRECTORY* get_data_directory(const unsigned char* pe_data, int entry_index) {
     DWORD opt_offset = get_optional_header_offset(pe_data);
     if (opt_offset == 0) return NULL;
@@ -413,6 +382,7 @@ PE_DATA_DIRECTORY* get_data_directory(const unsigned char* pe_data, int entry_in
  * Returns:
  *   Pointer to first PE_SECTION_HEADER, or NULL on error
  */
+
 PE_SECTION_HEADER* get_sections(const unsigned char* pe_data, PE_FILE_HEADER* file_hdr) {
     DWORD opt_offset = get_optional_header_offset(pe_data);
     if (opt_offset == 0) return NULL;
@@ -421,25 +391,7 @@ PE_SECTION_HEADER* get_sections(const unsigned char* pe_data, PE_FILE_HEADER* fi
 }
 
 
-/* ============================================================================
- * SECTION 4: SIGNATURE VERIFICATION
- * ============================================================================
- */
-
-
-/**
- * verify_certificate_structure - Check certificate table validity
- *
- * Validates:
- *   1. Certificate exists (Size > 0)
- *   2. Proper 8-byte alignment
- *   3. Valid revision (0x0200)
- *   4. Valid type (PKCS#7)
- *   5. No overlap with sections
- *
- * Returns:
- *   STATUS_OK, STATUS_WARNING, or STATUS_CRITICAL
- */
+    
 CHECK_STATUS verify_certificate_structure(const unsigned char* pe_data,
                                           DWORD file_size,
                                           PE_FILE_HEADER* file_hdr,
@@ -509,28 +461,7 @@ CHECK_STATUS verify_certificate_structure(const unsigned char* pe_data,
     return STATUS_OK;
 }
 
-
-/* ============================================================================
- * SECTION 5: MAIN INTEGRITY CHECK
- * ============================================================================
- */
-
-
-/**
- * check_integrity - Perform complete integrity verification
- *
- * Steps:
- *   1. Load PE file
- *   2. Validate PE headers
- *   3. Check certificate structure
- *   4. Compute SHA-256 hash (excluding certificate)
- *   5. Compare against expected hash (if provided)
- *   6. Generate report
- *
- * Parameters:
- *   input_path      - Path to PE file
- *   expected_hash   - Expected SHA-256 (64 hex chars), or NULL to skip comparison
- */
+     
 void check_integrity(const char* input_path, const char* expected_hash_str) {
     DWORD file_size;
     unsigned char* pe_data = load_pe_file(input_path, &file_size);
