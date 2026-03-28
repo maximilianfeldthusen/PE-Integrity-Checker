@@ -273,29 +273,7 @@ int compute_sha256_win(const unsigned char* data, DWORD size, char* hex_output) 
 
 #else
 
-
-/**
- * compute_sha256_openssl - Linux/macOS implementation using OpenSSL
- *
- * OpenSSL is the de facto crypto library on Unix-like systems
- * Advantages:
- *   - Widely available (pre-installed on most systems)
- *   - Well-tested and audited
- *   - Supports many algorithms beyond SHA-256
- *
- * Installation:
- *   Ubuntu/Debian: sudo apt-get install libssl-dev
- *   macOS: brew install openssl
- *   RHEL/CentOS: sudo yum install openssl-devel
- *
- * Parameters:
- *   data       - Input data buffer
- *   size       - Size of input data
- *   hex_output - Output buffer (must be at least 65 bytes)
- *
- * Returns:
- *   0 on success, -1 on error
- */
+    
 int compute_sha256_openssl(const unsigned char* data, DWORD size, char* hex_output) {
     EVP_MD_CTX* ctx = NULL;
     unsigned char digest[EVP_MAX_MD_SIZE];
