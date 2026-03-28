@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 *   Initial release of PE-Integrity-Checker 
 
 
-## [1.0.0] - 2026-03-23
+## [1.0.1beta] - 2026-03-23
 
 ### Added
 *   **Documentation:** Created `README.md`, and this `CHANGELOG.md`.
