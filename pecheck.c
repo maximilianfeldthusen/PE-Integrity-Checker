@@ -594,7 +594,7 @@ void check_integrity(const char* input_path, const char* expected_hash_str) {
     /* Decision Matrix */
     if (result.sig_status == STATUS_CRITICAL || result.hash_status == STATUS_CRITICAL) {
         printf("╔════════════════════════════════════════════════════════════════╗\n");
-        printf("║  ⚠️  SECURITY ALERT: FILE INTEGRITY COMPROMISED                ║\n");
+        printf("║  FILE INTEGRITY COMPROMISED                ║\n");
         printf("╚════════════════════════════════════════════════════════════════╝\n");
         printf("    DO NOT EXECUTE THIS FILE!\n");
         printf("    Possible causes:\n");
@@ -722,104 +722,8 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-Part 2: Detailed Code Explanation
-Section 1: File I/O Functions
-load_pe_file()
-unsigned char* load_pe_file(const char* path, DWORD* size)
-Purpose: Load entire PE file into memory for analysis.
-Why binary mode ("rb")?
-FILE* f = fopen(path, "rb");  // Binary prevents newline translation
-On Windows, text mode converts \r\n to \n
-PE files are binary - any translation corrupts the data
-Error handling:
-if (fseek(f, 0, SEEK_END) != 0) { perror("fseek failed"); return NULL; }
-Every operation checks for errors and cleans up resources.
-save_pe_file()
-int save_pe_file(const char* path, unsigned char* buffer, DWORD size)
-Purpose: Write modified PE back to disk (used after IAT reconstruction).
-Return value:
-1 = Success
-0 = Failure (with error message)
-
-Section 2: SHA-256 Hash Implementation
-Windows: BCrypt API
-int compute_sha256_win(const unsigned char* data, DWORD size, char* hex_output)
-Step-by-step flow:
-1. BCryptOpenAlgorithmProvider()  → Get SHA256 algorithm handle
-2. BCryptGetProperty()            → Get hash object size
-3. malloc()                       → Allocate hash object buffer
-4. BCryptCreateHash()             → Create hash context
-5. BCryptHashData()               → Feed data to hash
-6. BCryptFinishHash()             → Get final digest
-7. sprintf()                      → Convert to hex string
-8. Cleanup (free, close handles)
 
 
-Why BCrypt over older CryptoAPI?
-Feature
-BCrypt
-CryptoAPI (Legacy)
-Modern API
-✓
-✗
-Hardware acceleration
-✓
-Limited
-FIPS 140-2
-✓
-Partial
-Active development
-✓
-Deprecated
-
-Linux/macOS: OpenSSL
-int compute_sha256_openssl(const unsigned char* data, DWORD size, char* hex_output)
-Step-by-step flow:
-1. EVP_MD_CTX_new()           → Create hash context
-2. EVP_DigestInit_ex()        → Initialize with SHA256
-3. EVP_DigestUpdate()         → Feed data
-4. EVP_DigestFinal_ex()       → Get final digest
-5. sprintf()                  → Convert to hex string
-6. EVP_MD_CTX_free()          → Cleanup
-
-
-Installation requirements:
-# Ubuntu/Debian
-sudo apt-get install libssl-dev
-
-
-# macOS
-brew install openssl
-
-
-# RHEL/CentOS
-sudo yum install openssl-devel
-Why OpenSSL?
-Industry standard (used by Apache, Nginx, etc.)
-Actively maintained
-Cross-platform consistency
-Extensive documentation
-Platform Wrapper
-int compute_sha256(const unsigned char* data, DWORD size, char* hex_output)
-{
-#if PLATFORM_WINDOWS
-    return compute_sha256_win(data, size, hex_output);
-#else
-    return compute_sha256_openssl(data, size, hex_output);
-#endif
-}
-Benefits:
-Single function call in main code
-Platform detection at compile time
-No runtime overhead
-
-Section 3: PE Structure Accessors
-get_optional_header_offset()
-DWORD get_optional_header_offset(const unsigned char* pe_data)
-Calculates: e_lfanew + 24
-Why 24?
-NT Headers:
-  Signature:  4
 
 
 
