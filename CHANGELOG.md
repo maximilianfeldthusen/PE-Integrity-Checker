@@ -10,11 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Released]
 
 ### Added
-*   Initial release of the Secure Boot + OTA Update.
-*   Mock implementation of SHA-256 hashing and digital signing.
-*   A/B partition simulation logic.
-*   Rollback protection mechanism.
-*   Makefile and CMakeLists.txt build configurations.
+*   Initial release of PE-Integrity-Checker 
+
 
 ## [1.0.0] - 2026-03-23
 
